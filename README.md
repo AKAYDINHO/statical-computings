@@ -1,6 +1,6 @@
-# K-Means Clustering Example
+# Linear Regression Example
 
-This project provides Python and R implementations of the K-Means clustering algorithm.
+This project provides Python and R implementations of the Simple Linear Regression algorithm.
 
 ## Group Members
 
@@ -8,50 +8,56 @@ This project provides Python and R implementations of the K-Means clustering alg
 - abdifatah adan
 - abubakar omar
 
-## 1. Concept: K-Means Clustering
+## 1. Concept: Simple Linear Regression
 
-K-Means is one of the most popular unsupervised machine learning algorithms. It is used for **clustering**, which is the task of grouping a set of objects in such a way that objects in the same group (called a cluster) are more similar to each other than to those in other clusters.
+Simple Linear Regression is a statistical method that allows us to summarize and study relationships between two continuous (quantitative) variables:
 
-The main objective of the K-Means algorithm is to partition a dataset with 'n' observations into 'k' distinct, non-overlapping clusters.
+-   One variable, denoted `x`, is regarded as the **predictor**, **explanatory**, or **independent variable**.
+-   The other variable, denoted `y`, is regarded as the **response**, **dependent**, or **outcome variable**.
+
+The goal of simple linear regression is to model the relationship between `x` and `y` by fitting a linear equation to the observed data. The equation takes the form:
+
+`Y = β₀ + β₁X + ε`
+
+Where:
+-   `Y` is the dependent variable.
+-   `X` is the independent variable.
+-   `β₀` (beta naught) is the **y-intercept**, representing the value of `Y` when `X` is 0.
+-   `β₁` (beta one) is the **slope**, representing the change in `Y` for a one-unit change in `X`.
+-   `ε` (epsilon) is the **error term**, accounting for the variability in `Y` that cannot be explained by `X`.
+
+The method typically used to find the best-fitting line is the **Ordinary Least Squares (OLS)** method, which minimizes the sum of the squared differences between the observed `y` values and the `y` values predicted by the linear model.
 
 ### How the Algorithm Works
 
-The K-Means algorithm works iteratively through the following steps:
+1.  **Formulate the Model**: Define the linear relationship `y = β₀ + β₁x + ε`.
+2.  **Estimate Coefficients**: Use statistical methods (like OLS) to estimate the unknown parameters `β₀` and `β₁` from the given dataset. These estimated values are denoted as `b₀` and `b₁`.
+3.  **Predict**: Once `b₀` and `b₁` are found, the regression line `ŷ = b₀ + b₁x` can be used to predict the value of the dependent variable `ŷ` (y-hat) for any given value of `x`.
+4.  **Evaluate**: Assess the goodness of fit of the model using metrics like R-squared, p-values, and by examining residual plots.
 
-1.  **Initialization**: Choose 'k' initial cluster centers (centroids). A common method is to randomly select 'k' data points from the dataset.
-2.  **Assignment Step**: Assign each data point to the nearest centroid. The "nearness" is typically measured using the Euclidean distance.
-3.  **Update Step**: Recalculate the centroids of the newly formed clusters. The new centroid is the mean (average) of all data points assigned to that cluster.
-4.  **Repeat**: Steps 2 and 3 are repeated until the cluster assignments no longer change, or a maximum number of iterations is reached. The algorithm has converged when the assignments are stable.
+### Assumptions of Linear Regression
 
-### Choosing the Right Number of Clusters (k)
+For the OLS estimates to be unbiased and efficient, and for hypothesis testing to be valid, several assumptions should ideally hold:
 
-The number of clusters, 'k', is a hyperparameter that must be specified before running the algorithm. The choice of 'k' can significantly impact the quality of the clustering. A common method for determining the optimal 'k' is the **Elbow Method**:
+1.  **Linearity**: The relationship between X and Y must be linear.
+2.  **Independence of Errors**: The residuals (errors) should be independent of each other.
+3.  **Homoscedasticity**: The variance of the residuals should be constant across all levels of X.
+4.  **Normality of Errors**: The residuals should be normally distributed.
+5.  **No Multicollinearity** (for multiple linear regression): Independent variables should not be highly correlated with each other.
 
-1.  Run the K-Means algorithm for a range of 'k' values (e.g., from 1 to 10).
-2.  For each 'k', calculate the **Within-Cluster Sum of Squares (WCSS)**. WCSS is the sum of squared distances between each data point and its centroid.
-3.  Plot the WCSS for each 'k'.
-4.  The "elbow" of the curve—the point where the rate of decrease in WCSS sharply slows down—is a good estimate for the optimal 'k'.
+### Applications
 
-### Use Cases and Applications
-
-- **Customer Segmentation**: Grouping customers based on purchasing behavior, demographics, or website usage.
-- **Document Analysis**: Clustering documents based on their topics.
-- **Image Compression**: Grouping similar colors together to reduce the number of colors in an image.
-- **Anomaly Detection**: Identifying outliers that do not belong to any cluster.
-
-### Assumptions and Limitations
-
-- **Spherical Clusters**: K-Means assumes that clusters are spherical and evenly sized, which may not be true for all datasets.
-- **Sensitivity to Initialization**: The initial placement of centroids can influence the final clustering result. Running the algorithm multiple times with different initializations (`n_init` in scikit-learn) helps mitigate this.
-- **Need to Specify 'k'**: The number of clusters 'k' must be determined beforehand.
-- **Impact of Outliers**: K-Means is sensitive to outliers, which can skew the cluster centroids.
+-   **Sales Forecasting**: Predicting future sales based on advertising spending.
+-   **Economic Analysis**: Modeling the relationship between inflation and unemployment.
+-   **Medical Research**: Studying the effect of drug dosage on patient recovery time.
+-   **Real Estate**: Estimating house prices based on features like size or number of bedrooms.
 
 ## 2. Scripts
 
 This repository contains the following scripts:
 
-- `kmeans_clustering.py`: A Python script using `scikit-learn` and `matplotlib` to perform and visualize K-Means clustering.
-- `kmeans_clustering.R`: An R script using base R and `ggplot2` to perform and visualize K-Means clustering.
+- `linear_regression.py`: A Python script using `scikit-learn` and `matplotlib` to perform and visualize Simple Linear Regression.
+- `linear_regression.R`: An R script using base R functions and `ggplot2` to perform and visualize Simple Linear Regression.
 
 ### Running the Python Script
 
@@ -64,7 +70,7 @@ pip install scikit-learn matplotlib
 Then, run the script from your terminal:
 
 ```bash
-python kmeans_clustering.py
+python linear_regression.py
 ```
 
 ### Running the R Script
@@ -78,5 +84,5 @@ install.packages("ggplot2")
 Then, run the script using `Rscript` or from an R environment:
 
 ```bash
-Rscript kmeans_clustering.R
+Rscript linear_regression.R
 ```
